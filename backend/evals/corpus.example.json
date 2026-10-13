@@ -1,0 +1,11 @@
+[
+  {
+    "id": "your-document-question",
+    "category": "answerable",
+    "question": "Replace with a representative question about your indexed source.",
+    "source_ids": ["REPLACE_WITH_SOURCE_ID_FROM_API_SOURCES"],
+    "expected_chunks": ["REPLACE_WITH_SOURCE_ID:0"],
+    "expected_facts": ["Replace with a manually verified reference fact."],
+    "expected_abstention": false
+  }
+]

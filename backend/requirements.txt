@@ -1,0 +1,15 @@
+# Use Python 3.13 (the configured .venv); MarkItDown requires Python <3.15.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+python-dotenv>=1.0
+pydantic>=2,<3
+google-genai>=2.20,<3
+langchain>=0.3
+langchain-core>=1.6.1,<2
+langchain-text-splitters>=0.3
+langchain-google-genai>=4.4,<5
+langchain-qdrant>=0.2
+qdrant-client[fastembed]>=1.12
+langgraph>=0.2
+markitdown[all]>=0.1
