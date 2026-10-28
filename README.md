@@ -2,7 +2,7 @@
 
 A document research workspace with source-grounded chat, cited summaries, quality evaluations, and token and cost observability.
 
-<video src="https://raw.githubusercontent.com/Idanish123/rag-notebook/main/ragnotebook.mp4" width="100%" controls playsinline></video>
+https://github.com/user-attachments/assets/168ac0ab-3437-440b-bb9b-f5c63847d11d
 
 Notebook RAG combines Gemini, LangGraph, Qdrant hybrid retrieval, and MarkItDown behind a FastAPI service and a React interface. Its bounded retrieval loop searches selected sources, checks evidence, verifies drafted claims, and either returns a cited answer or abstains.
 
