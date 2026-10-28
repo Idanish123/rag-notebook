@@ -2,6 +2,8 @@
 
 A document research workspace with source-grounded chat, cited summaries, quality evaluations, and token and cost observability.
 
+<video src="https://raw.githubusercontent.com/Idanish123/rag-notebook/main/ragnotebook.mp4" width="100%" controls playsinline></video>
+
 Notebook RAG combines Gemini, LangGraph, Qdrant hybrid retrieval, and MarkItDown behind a FastAPI service and a React interface. Its bounded retrieval loop searches selected sources, checks evidence, verifies drafted claims, and either returns a cited answer or abstains.
 
 **Project status:** local development application. The repository includes grounding controls and regression checks; production deployment, complete online benchmark coverage, and formal compliance certification have not been established.
@@ -347,7 +349,7 @@ From `backend/`, in Windows PowerShell:
 .\.venv\Scripts\python.exe -m app.evaluation --weave
 ```
 
-On POSIX systems, substitute `.venv/bin/python` for the Windows interpreter path. **Stop the backend before a CLI corpus run with embedded Qdrant**, then restart it afterward. Fixture runs do not open the embedded vector database. An external Qdrant server removes this particular storage lock restriction.
+On POSIX systems, substitute `.venv/bin/python` for the Windows interpreter path. **Stop the backend before a CLI corpus run with embedded Qdrant**, then restart it afterward. Fixture runs do not open the embedded vector database.
 
 ### Custom dataset
 
@@ -478,7 +480,7 @@ Example chat request body:
 }
 ```
 
-Chat requests also accept optional `model`, `verification_model`, and `source_ids`. Supplied source IDs must be ready; omitted IDs preserve the selected-source behavior. Both models are held for the entire request, including repairs. SSE events are `start`, `step`, `token`, `done`, and `error`; `start`, `done`, and `error` identify the actual models and source IDs. The final `done` payload includes `answer`, `citations`, `run_id`, `verification`, `usage`, and `abstained`. The browser parser handles split UTF-8/events and surfaces interrupted streams. Stopping the browser request does not guarantee cancellation of all upstream provider work.
+Chat requests also accept optional `model`, `verification_model`, and `source_ids`. Supplied source IDs must be ready; omitted IDs preserve the selected-source behavior. Both models are held for the entire request, including repairs. SSE events are `start`, `step`, `token`, `done`, and `error`; `done` includes `answer`, `citations`, `run_id`, `verification`, `usage`, and `abstained`. The browser parser handles split UTF-8/event streams and surfaces interrupted streams.
 
 ## Project structure
 
@@ -541,11 +543,11 @@ npm.cmd run build
 
 Backend checks use mocked provider responses and exercise grounding, source ingestion failure handling, streaming contracts, history validation, usage accounting, and metadata export. Frontend checks use Node's test runner for API/SSE parsing and failure handling. They do not replace live provider evaluations.
 
-Recorded development validation on **11 October 2026**: 24 backend checks and seven frontend checks passed, and the Vite production build completed. A live PDF chat returned three verified claims after one repair. The six-case online suite remained incomplete because of judge/provider/quota errors; a complete-suite quality pass is not claimed. Dependency checks on **12 October 2026** confirmed the Python 3.13.3 environment and optional Weave installation. See [implementation notes](IMPLEMENTATION_REPORT.md) for the historical snapshot, and rerun checks after changes.
+Recorded development validation on **11 October 2026**: 24 backend checks and seven frontend checks passed, and the Vite production build completed. A live PDF chat returned three verified claims after one repair. The six-case online suite remained incomplete because of judge/provider/quota errors; a complete-suite quality pass is not claimed. Dependency checks on **12 October 2026** confirmed the Python 3.13.3 environment and optional Weave installation. See [IMPLEMENTATION_REPORT.md](IMPLEMENTATION_REPORT.md) for the historical snapshot, and rerun checks after changes.
 
 There is currently no committed CI workflow. Do not interpret the historical results as an automated build status.
 
-Workspace feature validation on **13 October 2026**: 33 backend and 35 frontend offline checks passed; the production build completed. Browser checks covered legacy-history migration, isolated drafts, chat switching, panel visibility/order, keyboard resizing, export controls and copying citations. Native sharing and pointer resizing have automated/helper coverage but were not exercised through the operating system share sheet. Live provider availability still depends on the account and service status.
+Workspace feature validation on **13 October 2026**: 33 backend and 35 frontend offline checks passed; the production build completed. Browser checks covered legacy-history migration, isolated drafts, chat switching, panel visibility/order, keyboard resizing, export controls and copying citations. Native sharing and pointer resizing have automated/helper coverage but were not exercised through the operating-system share sheet. Live provider availability still depends on the account and service status.
 
 ## Operations, privacy, and deployment
 
@@ -589,7 +591,7 @@ The repository does not include Docker/Compose deployment files, authentication 
 | Python 3.15 installation failure | Use Python 3.13; the installed MarkItDown release requires Python below 3.15. |
 | Relative-import error from `app/main.py` | Start with `python -m uvicorn app.main:app` using the environment's interpreter from `backend/`. |
 | `npm.ps1` blocked by execution policy | Use `npm.cmd ci` and `npm.cmd run dev`. |
-| `Activate.ps1` blocked | Call `.\.venv\Scripts\python.exe` directly, as shown in Quick start. |
+| `Activate.ps1` blocked | Call `\.venv\Scripts\python.exe` directly, as shown in Quick start. |
 | `&&` rejected | Run each command separately in Windows PowerShell 5.1. |
 | `npm` / `npm.cmd` not found | Install Node.js LTS and open a new terminal so PATH is refreshed. |
 | `EBADPLATFORM` during frontend install | Current direct Rollup dependency targets Windows x64; cross-platform packaging needs to be addressed. |
